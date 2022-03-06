@@ -1,6 +1,7 @@
 ;; init packages
-(setq package-archives
-        '(("melpa" . "http://melpa.org/packages/")))
+(setq package-archives '(
+    ("gnu" . "https://elpa.gnu.org/packages/")
+    ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
 ;; refresh contents on first start
 (unless package-archive-contents
