@@ -9,7 +9,8 @@
 ;; Declare packages
 (setq my-packages
       '(which-key
-	magit))
+	magit
+	multiple-cursors))
 
 ;; Iterate on packages and install missing ones
 (dolist (pkg my-packages)
@@ -22,7 +23,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(tango-dark))
- '(package-selected-packages '(use-package multiple-cursors magit which-key))
+ '(package-selected-packages '(lsp-mode use-package multiple-cursors magit which-key))
  '(term-color-blue ((t (:background "dark cyan" :foreground "dark cyan")))))
 
 ;; linum-mode
@@ -58,3 +59,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+
+;;;;;;;;;;;;;;;;;
+;; winner-mode ;;
+;;;;;;;;;;;;;;;;;
+(winner-mode 1)
