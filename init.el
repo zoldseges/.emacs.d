@@ -10,7 +10,8 @@
 ;; Declare packages
 (setq my-packages
       '(which-key
-	magit))
+	magit
+	multiple-cursors))
 
 ;; Iterate on packages and install missing ones
 (dolist (pkg my-packages)
@@ -23,7 +24,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(tango-dark))
- '(package-selected-packages '(use-package multiple-cursors magit which-key))
+ '(package-selected-packages
+   '(glsl-mode lsp-mode use-package multiple-cursors magit which-key))
  '(term-color-blue ((t (:background "dark cyan" :foreground "dark cyan")))))
 
 ;; linum-mode
@@ -38,6 +40,12 @@
 ;; disable tool-bar
 (tool-bar-mode -1)
 
+;; show-parenthesis
+(show-paren-mode 1)
+
+(global-set-key (kbd "C-c C-r") `replace-string)
+(global-set-key (kbd "C-c C-t") `query-replace)
+
 ;;;;;;;;;;;;;;;
 ;; Which-key ;;
 ;;;;;;;;;;;;;;;
@@ -46,7 +54,12 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; multiple cursors                                          ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(global-set-key (kbd "C-c m c") 'mc/edit-lines)
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->")         'mc/mark-next-like-this)
+(global-set-key (kbd "C-<")         'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<")     'mc/mark-all-like-this)
+(global-set-key (kbd "C-\"")        'mc/skip-to-next-like-this)
+(global-set-key (kbd "C-:")         'mc/skip-to-previous-like-this)
 
 ;;;;;;;;;;;;;
 ;; compile ;;
@@ -59,3 +72,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+
+;;;;;;;;;;;;;;;;;
+;; winner-mode ;;
+;;;;;;;;;;;;;;;;;
+(winner-mode 1)
