@@ -8,6 +8,7 @@
 	c-electric-delete-forward
 	c-electric-paren
 	c-indent-line-or-region
+	kill-region
 	))
 
 (setq mc/cmds-to-run-once
