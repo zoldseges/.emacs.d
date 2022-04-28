@@ -11,7 +11,16 @@
 (setq my-packages
       '(which-key
 	magit
-	multiple-cursors))
+	multiple-cursors
+	;; flutter
+	dart-mode
+	lsp-mode
+	lsp-dart
+	lsp-treemacs
+	flycheck
+	lsp-ui
+	company
+	hover))
 
 ;; Iterate on packages and install missing ones
 (dolist (pkg my-packages)
@@ -26,7 +35,7 @@
  '(custom-enabled-themes '(tango-dark))
  '(font-use-system-font t)
  '(package-selected-packages
-   '(rust-mode glsl-mode use-package multiple-cursors magit which-key))
+   '(yaml-mode flutter lsp-dart go-mode lsp-java rust-mode glsl-mode use-package multiple-cursors magit which-key))
  '(term-color-blue ((t (:background "dark cyan" :foreground "dark cyan"))))
  '(tool-bar-mode nil))
 
@@ -54,9 +63,10 @@
 ;; show-parenthesis
 (show-paren-mode 1)
 
-;; align
-(global-set-key (kbd "C-c C-a") 'align)
-(global-set-key (kbd "C-c C-s") 'align-regexp)
+(linum-mode 1)
+;; cursor pos
+(column-number-mode 1)
+(line-number-mode 1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; generate ascending numbers	  ;;
@@ -93,3 +103,12 @@
 ;; winner-mode ;;
 ;;;;;;;;;;;;;;;;;
 (winner-mode 1)
+
+;;;;;;;;;;;;;
+;; Flutter ;;
+;;;;;;;;;;;;;
+
+(add-hook 'dart-mode-hook 'lsp)
+
+(setq gc-cons-treshold (* 100 1024 1024)
+      read-process-output-max (* 1024 1024))
