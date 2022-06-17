@@ -1,7 +1,7 @@
 ;; init packages
 (setq package-archives '(
-    ("gnu" . "https://elpa.gnu.org/packages/")
-    ("melpa" . "https://melpa.org/packages/")))
+			 ("gnu" . "https://elpa.gnu.org/packages/")
+			 ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
 ;; refresh contents on first start
 (unless package-archive-contents
@@ -32,10 +32,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(column-number-mode t)
  '(custom-enabled-themes '(tango-dark))
  '(font-use-system-font t)
  '(package-selected-packages
-   '(yaml-mode flutter lsp-dart go-mode lsp-java rust-mode glsl-mode use-package multiple-cursors magit which-key))
+   '(org-roam yaml-mode flutter lsp-dart go-mode lsp-java rust-mode glsl-mode use-package multiple-cursors magit which-key))
+ '(show-paren-mode t)
  '(term-color-blue ((t (:background "dark cyan" :foreground "dark cyan"))))
  '(tool-bar-mode nil))
 
@@ -44,7 +46,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Liberation Mono" :foundry "1ASC" :slant normal :weight normal :height 98 :width normal)))))
+ '(default ((t (:family "Liberation Mono" :foundry "1ASC" :slant normal :weight normal :height 120 :width normal)))))
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
@@ -67,6 +69,10 @@
 ;; cursor pos
 (column-number-mode 1)
 (line-number-mode 1)
+
+;; mv and cp files in dired
+;; https://emacs.stackexchange.com/a/5604/31726
+(setq dired-dwim-target t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; generate ascending numbers	  ;;
@@ -112,3 +118,31 @@
 
 (setq gc-cons-treshold (* 100 1024 1024)
       read-process-output-max (* 1024 1024))
+
+;;;;;;;;;;;;;;;;;;
+;; transparency ;;
+;;;;;;;;;;;;;;;;;;
+
+;;(set-frame-parameter (selected-frame) 'alpha '(<active> . <inactive>))
+;;(set-frame-parameter (selected-frame) 'alpha <both>)
+(set-frame-parameter (selected-frame) 'alpha '(85 . 50))
+(add-to-list 'default-frame-alist '(alpha . (85 . 50)))
+
+(defun toggle-transparency ()
+  (interactive)
+  (let ((alpha (frame-parameter nil 'alpha)))
+    (set-frame-parameter
+     nil 'alpha
+     (if (eql (cond ((numberp alpha) alpha)
+                    ((numberp (cdr alpha)) (cdr alpha))
+                    ;; Also handle undocumented (<active> <inactive>) form.
+                    ((numberp (cadr alpha)) (cadr alpha)))
+              100)
+         '(85 . 50) '(100 . 100)))))
+(global-set-key (kbd "C-c t") 'toggle-transparency)
+
+;; Set transparency of emacs
+(defun transparency (value)
+  "Sets the transparency of the frame window. 0=transparent/100=opaque"
+  (interactive "nTransparency Value 0 - 100 opaque:")
+  (set-frame-parameter (selected-frame) 'alpha value))
