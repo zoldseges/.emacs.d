@@ -171,3 +171,6 @@
   "~/.emacs.d/lsp-clangd"
   :init
   (add-hook 'c++-mode-hook 'lsp-clangd-c++-enable))
+
+;; Start completion with C-=
+(global-set-key (kbd "C-=") 'company-complete)
