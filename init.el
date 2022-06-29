@@ -20,6 +20,7 @@
 	flycheck
 	lsp-ui
 	company
+	use-package
 	hover))
 
 ;; Iterate on packages and install missing ones
@@ -146,3 +147,27 @@
   "Sets the transparency of the frame window. 0=transparent/100=opaque"
   (interactive "nTransparency Value 0 - 100 opaque:")
   (set-frame-parameter (selected-frame) 'alpha value))
+
+
+;; clangd-emacs-ide
+;; https://ddavis.io/posts/clangd-emacs-ide/
+;; Debian 11: clang, clangd, clang-tools
+
+;; (use-package company-lsp
+;;   :ensure t
+;;   :config
+;;   (push 'company-lsp company-backends)
+;;   (add-hook 'after-init-hook 'global-company-mode))
+
+(use-package lsp-mode
+  :ensure t
+  :commands lsp)
+
+(use-package lsp-ui
+  :ensure t)
+
+(use-package lsp-clangd
+  :load-path
+  "~/.emacs.d/lsp-clangd"
+  :init
+  (add-hook 'c++-mode-hook 'lsp-clangd-c++-enable))
