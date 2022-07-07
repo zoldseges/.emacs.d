@@ -37,7 +37,7 @@
  '(custom-enabled-themes '(tango-dark))
  '(font-use-system-font t)
  '(package-selected-packages
-   '(org-roam yaml-mode flutter lsp-dart go-mode lsp-java rust-mode glsl-mode use-package multiple-cursors magit which-key))
+   '(scad-mode org-roam yaml-mode flutter lsp-dart go-mode lsp-java rust-mode glsl-mode use-package multiple-cursors magit which-key))
  '(show-paren-mode t)
  '(term-color-blue ((t (:background "dark cyan" :foreground "dark cyan"))))
  '(tool-bar-mode nil))
