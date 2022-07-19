@@ -174,3 +174,7 @@
 
 ;; Start completion with C-=
 (global-set-key (kbd "C-=") 'company-complete)
+
+;; GLSL
+(add-to-list 'auto-mode-alist '("\\.vs\\'" . glsl-mode))
+(add-to-list 'auto-mode-alist '("\\.fs\\'" . glsl-mode))
