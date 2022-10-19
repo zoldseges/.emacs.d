@@ -33,11 +33,13 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#e090d7" "#8cc4ff" "#eeeeec"])
  '(column-number-mode t)
- '(custom-enabled-themes '(tango-dark))
+ '(custom-enabled-themes nil)
  '(font-use-system-font t)
  '(package-selected-packages
-   '(pdf-tools cider elpy haskell-mode scad-mode org-roam yaml-mode flutter lsp-dart go-mode lsp-java rust-mode glsl-mode use-package multiple-cursors magit which-key))
+   '(solarized-theme pdf-tools cider elpy haskell-mode scad-mode org-roam yaml-mode flutter lsp-dart go-mode lsp-java rust-mode glsl-mode use-package multiple-cursors magit which-key))
  '(show-paren-mode t)
  '(term-color-blue ((t (:background "dark cyan" :foreground "dark cyan"))))
  '(tool-bar-mode nil))
@@ -126,8 +128,9 @@
 
 ;;(set-frame-parameter (selected-frame) 'alpha '(<active> . <inactive>))
 ;;(set-frame-parameter (selected-frame) 'alpha <both>)
-(set-frame-parameter (selected-frame) 'alpha '(85 . 50))
-(add-to-list 'default-frame-alist '(alpha . (85 . 50)))
+
+(set-frame-parameter (selected-frame) 'alpha '(96 . 92))
+(add-to-list 'default-frame-alist '(alpha . (96 . 92)))
 
 (defun toggle-transparency ()
   (interactive)
@@ -139,7 +142,7 @@
                     ;; Also handle undocumented (<active> <inactive>) form.
                     ((numberp (cadr alpha)) (cadr alpha)))
               100)
-         '(85 . 50) '(100 . 100)))))
+         '(96 . 92) '(100 . 100)))))
 (global-set-key (kbd "C-c t") 'toggle-transparency)
 
 ;; Set transparency of emacs
@@ -181,3 +184,10 @@
 
 ;; Switch to other frame
 (global-set-key (kbd "C-x O") 'other-frame)
+
+;; Solarized theme
+;; https://github.com/bbatsov/solarized-emacs
+(load-theme 'solarized-dark t)
+
+;; pdf-tools
+(pdf-tools-install)
